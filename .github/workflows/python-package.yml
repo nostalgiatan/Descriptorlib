@@ -28,12 +28,15 @@ jobs:
 
     - name: Lint with flake8
       run: conda run -n libenv flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
     - name: Test with pytest
       run: |
-        cd $GITHUB_WORKSPACE  # 确保切换到正确的目录
         conda run -n libenv coverage run --source=Descriptorlib run_tests_with_coverage.py
+      shell: /usr/bin/bash -e {0}
       env:
-        GITHUB_WORKSPACE: ${{ github.workspace }}
+        INPUT_RUN_POST: true
+        CONDA: /usr/share/miniconda3
+        CONDA_PKGS_DIR: /home/runner/conda_pkgs_dir
         
     - name: Coverage
       run: conda run -n libenv coverage xml
