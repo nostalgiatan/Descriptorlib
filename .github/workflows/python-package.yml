@@ -29,7 +29,7 @@ jobs:
     - name: Install pytest directly
       run: conda install -n libenv pytest
     - name: Test with pytest
-      run: conda run -n libenv pytest tests/
+      run: conda run -n libenv python -m Descriptorlib.run_tests_with_coverage
     - name: Coverage
       run: |
         pip install coverage
