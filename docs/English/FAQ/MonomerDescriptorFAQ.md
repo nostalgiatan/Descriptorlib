@@ -65,3 +65,35 @@ for item in test_obj.iterate_myattr():
 ```
 
 ---
+
+## Error: Using a Class Instead of an Instance in Property Dependency Checks
+
+When using the `depends_on` decorator with `MonomerPropertyDescriptor`, a common mistake is to pass a class as an argument to the lambda function instead of an instance of the class.
+
+### Error Example
+
+```python
+class SampleClass:
+    prop1 = MonomerPropertyDescriptor(default=0)
+    prop2 = MonomerPropertyDescriptor(default=0, depends_on=lambda cls: cls.prop1 > 0)
+```
+
+In the code above, the `depends_on` decorator uses the `cls` parameter, which is typically a reference to the class itself, not an instance of the class. This will cause the property dependency check to fail, as it does not trigger the `get` method of the descriptor.
+
+### Solution
+
+To address this issue, you should ensure that the `depends_on` decorator uses an instance of the class. Here is an example of how to correctly implement the property dependency check:
+
+```python
+class SampleClass:
+    prop1 = MonomerPropertyDescriptor(default=0, version_control=True)
+    prop2 = MonomerPropertyDescriptor(default=0, depends_on=lambda instance: instance.prop1 > 0)
+```
+
+In this corrected example, the `depends_on` decorator takes advantage of the fact that by calling `instance.prop1`, we can access the value of `prop1` to determine whether setting `prop2` is allowed.
+
+### Considerations
+
+- Make sure that the lambda function within the `depends_on` decorator accepts `instance` as a parameter.
+
+---
