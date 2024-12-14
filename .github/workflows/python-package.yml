@@ -24,9 +24,6 @@ jobs:
     - name: Install flake8 directly
       run: conda install -n libenv flake8
 
-    - name: Activate Conda environment
-      run: conda activate libenv
-
     - name: Lint with flake8
       run: conda run -n libenv flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
     - name: Test with pytest
