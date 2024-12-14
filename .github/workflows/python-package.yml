@@ -38,7 +38,7 @@ jobs:
       uses: coverallsapp/github-action@v2.3.4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./descriptorlib/coverage.xml  # 确保路径与脚本中生成的 XML 文件路径一致
+        path-to-lcov: ./coverage.xml  # 确保路径与脚本中生成的 XML 文件路径一致
       env:
         COVERALLS_PARALLEL: true
         COVERALLS_FLAG_NAME: myflag
