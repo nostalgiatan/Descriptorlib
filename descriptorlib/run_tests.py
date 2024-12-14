@@ -1,4 +1,3 @@
-# Descriptorlib/run_coverage.py
 import pytest
 from coverage import Coverage
 
@@ -12,8 +11,8 @@ def run_tests_with_coverage():
     cov.save()
 
     cov.report()
-    cov.html_report(directory='htmlcov')
-    print("覆盖率报告已保存到 htmlcov/index.html")
+    cov.xml_report(outfile='coverage.xml')  # 生成 XML 报告
+    print("覆盖率报告已保存到 coverage.xml")
 
 if __name__ == '__main__':
     run_tests_with_coverage()
