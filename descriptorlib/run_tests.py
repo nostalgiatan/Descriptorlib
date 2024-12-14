@@ -6,7 +6,7 @@ def run_tests_with_coverage():
     cov = Coverage()
     cov.start()
 
-    pytest.main(args=['-v', 'Descriptorlib/tests'])
+    pytest.main(args=['-v', 'descriptorlib/tests'])
 
     cov.stop()
     cov.save()
