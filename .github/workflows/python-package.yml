@@ -1,0 +1,64 @@
+name: Python Package
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Cache Conda
+      uses: actions/cache@v3
+      with:
+        path: ~/conda
+        key: ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
+    - name: Set up Conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        python-version: '3.11'
+        miniconda-version: latest
+    - name: Update Conda
+      run: conda update --yes -n base conda
+    - name: Install dependencies
+      run: |
+        conda env create --file environment.yml --name myenv
+        conda activate myenv
+    - name: Lint with flake8
+      run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    - name: Test with pytest
+      run: pytest
+    - name: Coverage
+      run: |
+        pip install coverage
+        coverage run --source=Descriptorlib pytest
+        coverage xml
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2.3.4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        COVERALLS_PARALLEL: true
+    - name: Build the package
+      run: |
+        python setup.py sdist bdist_wheel
+        ls dist  # Optional: to check the contents of the dist directory
+    - name: Install the package
+      run: pip install dist/*
+    - name: Check the installed package
+      run: |
+        # Run some basic commands to verify the package is installed correctly
+        # For example, if your package is named 'my_package', you could do:
+        # python -c "import my_package; print(my_package.__version__)"
+    - name: Check distribution
+      run: twine check dist/*
+    - name: Publish to PyPI
+      if: startsWith(github.ref, 'refs/tags')
+      run: |
+        pip install twine
+        twine upload dist/*
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
