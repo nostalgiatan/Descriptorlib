@@ -1,8 +1,8 @@
 import pytest
-from ..monomer import MonomerPropertyDescriptor
+from descriptorlib.monomer import MonomerPropertyDescriptor
 import threading
 from unittest.mock import patch
-from ..monomer.libException import MonomerPropertyError, DeserializationError, SerializationError
+from descriptorlib.monomer.libException import MonomerPropertyError, DeserializationError, SerializationError
 
 class TestMonomerPropertyDescriptor:
     class SampleClass:
