@@ -37,9 +37,6 @@ jobs:
         INPUT_RUN_POST: true
         CONDA: /usr/share/miniconda3
         CONDA_PKGS_DIR: /home/runner/conda_pkgs_dir
-        
-    - name: Coverage
-      run: conda run -n libenv coverage xml
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.4
