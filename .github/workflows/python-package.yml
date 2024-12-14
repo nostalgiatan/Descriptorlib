@@ -45,8 +45,16 @@ jobs:
       uses: coverallsapp/github-action@v2.3.4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./descriptorlib/coverage.xml  # 指定覆盖率数据文件的路径
       env:
         COVERALLS_PARALLEL: true
+        COVERALLS_FLAG_NAME: myflag
+        COVERALLS_SERVICE_NAME: github
+        COVERALLS_SERVICE_JOB_ID: ${{ github.run_id }}
+        COVERALLS_SERVICE_PULL_REQUEST: ${{ github.event.pull_request.number }}
+      after_script:
+        - conda run -n libenv coverage xml
+
 
     - name: Build the package
       run: |
