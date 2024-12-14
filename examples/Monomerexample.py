@@ -1,4 +1,4 @@
-from ..monomer import MonomerPropertyDescriptor
+from descriptorlib.monomer import MonomerPropertyDescriptor
 
 class MyClass:
     myattr = MonomerPropertyDescriptor(
