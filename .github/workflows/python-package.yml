@@ -26,8 +26,10 @@ jobs:
 
     - name: Lint with flake8
       run: conda run -n libenv flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    - name: Install pytest directly
+      run: conda install -n libenv pytest
     - name: Test with pytest
-      run: pytest tests/
+      run: conda run -n libenv pytest tests/
     - name: Coverage
       run: |
         pip install coverage
