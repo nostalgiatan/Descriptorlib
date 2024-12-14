@@ -30,7 +30,7 @@ jobs:
       run: conda run -n libenv flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
     - name: Test with pytest
       run: |
-        cd $GITHUB_WORKSPACE
+        # cd $GITHUB_WORKSPACE
         conda run -n libenv coverage run --source=Descriptorlib run_tests_with_coverage.py
         
     - name: Coverage
