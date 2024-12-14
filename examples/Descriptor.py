@@ -1,4 +1,5 @@
 from Descriptorlib.monomer import Descriptor
+from Descriptorlib.monomer.libException import DescriptorLibError
 
 class MyClass:
     attr = Descriptor('attr')
