@@ -1,9 +1,9 @@
-from .__about__ import __author__, __copyright__, __version__
+from .monomer import 
 from .run_tests import run_tests_with_coverage
 
 __all__ = [
-    "__author__",
-    "__copyright__",
-    "__version__",
+    'Descriptor', 
+    'MonomerPropertyDescriptor', 
+    'libException'
     "run_tests_with_coverage",
 ]
