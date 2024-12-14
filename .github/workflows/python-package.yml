@@ -31,7 +31,7 @@ jobs:
     - name: Test with pytest
       run: |
         cd $GITHUB_WORKSPACE
-        conda run -n libenv coverage run --source=Descriptorlib Descriptorlib/run_tests_with_coverage.py
+        conda run -n libenv coverage run --source=Descriptorlib run_tests_with_coverage.py
         
     - name: Coverage
       run: conda run -n libenv coverage xml
