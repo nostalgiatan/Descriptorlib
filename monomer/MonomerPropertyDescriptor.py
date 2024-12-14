@@ -35,6 +35,9 @@ class MonomerPropertyDescriptor(Descriptor):
         self.private_name = None
         self.history = []
         self.lock = threading.Lock() if thread_safe else None
+        if self.version_control and self.default is not None:
+            self.history.append(self.default)
+        self.deserialize_open = False
 
     def __set_name__(self, owner, name):
         self.private_name = f"_{name}"
@@ -43,13 +46,14 @@ class MonomerPropertyDescriptor(Descriptor):
         if instance is None:
             return self
         self.instance = instance
-
+    
         try:
             if self.lazy and not hasattr(instance, self.private_name):
                 if self.factory is not None:
                     value = self.factory(instance)
-                    if self.deserialize and self.propert_type is not None:
+                    if self.deserialize and self.propert_type is not None and self.deserialize_open is False:
                         value = self.deserialize_value(value, self.propert_type)
+                        self.deserialize_open = True
                     setattr(instance, self.private_name, value)
                 else:
                     raise MonomerPropertyError(
@@ -57,16 +61,24 @@ class MonomerPropertyDescriptor(Descriptor):
                         property_name=self.private_name[1:],
                         message=f"Lazy attribute '{self.private_name[1:]}' requires a factory function."
                     )
-
+    
             if self.thread_safe:
                 with self.lock:
                     value = getattr(instance, self.private_name, self.default)
             else:
                 value = getattr(instance, self.private_name, self.default)
-
-            if self.deserialize and self.propert_type is not None:
+    
+            if value is None and self.default is None:
+                raise MonomerPropertyError(
+                    error_code='ATTRIBUTE_DELETED',
+                    property_name=self.private_name[1:],
+                    message=f"Attribute '{self.private_name[1:]}' has been deleted and no default value is set."
+                )
+    
+            if self.deserialize and self.propert_type is not None and self.deserialize_open is False:
                 value = self.deserialize_value(value, self.propert_type)
-
+                self.deserialize_open = True
+    
         except DeserializationError as e:
             raise MonomerPropertyError(
                 error_code='ATTRIBUTE_NOT_DESERIALIZABLE',
@@ -80,7 +92,8 @@ class MonomerPropertyDescriptor(Descriptor):
                 property_name=self.private_name[1:],
                 message=str(e)
             )
-
+    
+        self.deserialize_open = False
         return value
 
     def __set__(self, instance, value):
@@ -97,6 +110,13 @@ class MonomerPropertyDescriptor(Descriptor):
                 self._raise_error("access_control")
             if not self.writable:
                 self._raise_error("writable")
+            if self.depends_on is not None:
+                if not self.depends_on(instance):
+                    raise MonomerPropertyError(
+                        error_code='DEPENDENCY_FAILED',
+                        property_name=self.private_name[1:],
+                        message=f"Attribute '{self.private_name[1:]}' cannot be set due to dependency failure."
+                    )
         
             # 使用锁来确保线程安全
             if self.thread_safe:
@@ -160,8 +180,10 @@ class MonomerPropertyDescriptor(Descriptor):
 
     def __delete__(self, instance):
         try:
-            if self.immutable or self.read_only:
-                self._raise_error("delete")
+            if self.immutable:
+                self._raise_error("delete_immutable")
+            if self.read_only:
+                self._raise_error("delete_read_only")
             if hasattr(instance, self.private_name):
                 if self.thread_safe:
                     with self.lock:
@@ -201,8 +223,10 @@ class MonomerPropertyDescriptor(Descriptor):
             error_code = 'ACCESS_CONTROL'
         elif error_type == "writable":
             error_code = 'ATTRIBUTE_READONLY_AFTER_INIT'
-        elif error_type == "delete":
+        elif error_type == "delete_immutable":
             error_code = 'ATTRIBUTE_IMMUTABLE_AFTER_SET'
+        elif error_type == "delete_read_only":
+            error_code = 'ATTRIBUTE_READONLY_AFTER_SET'
         elif error_type == "non_iterable":
             error_code = 'ATTRIBUTE_NON_ITERABLE'
     
@@ -275,6 +299,7 @@ class MonomerPropertyDescriptor(Descriptor):
             return serialized_value, value_type
         except Exception as e:
             raise SerializationError(
+                error_code='SERIALIZATION_ERROR',
                 message=str(e),
                 attribute_name=self.private_name[1:]
             )
@@ -286,6 +311,7 @@ class MonomerPropertyDescriptor(Descriptor):
             return deserialized_value
         except Exception as e:
             raise DeserializationError(
+                error_code='DESERIALIZATION_ERROR',
                 message=str(e),
                 attribute_name=self.private_name[1:]
             )
