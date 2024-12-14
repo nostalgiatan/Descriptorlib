@@ -29,28 +29,22 @@ jobs:
     - name: Lint with flake8
       run: conda run -n libenv flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
-    - name: Test with pytest
+    - name: Test with pytest and generate coverage
       run: |
-        conda run -n libenv coverage run --source=Descriptorlib/descriptorlib _run_test.py
+        conda run -n libenv python _run_test.py
       shell: /usr/bin/bash -e {0}
-      env:
-        INPUT_RUN_POST: true
-        CONDA: /usr/share/miniconda3
-        CONDA_PKGS_DIR: /home/runner/conda_pkgs_dir
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./descriptorlib/coverage.xml  # 指定覆盖率数据文件的路径
+        path-to-lcov: ./descriptorlib/coverage.xml  # 确保路径与脚本中生成的 XML 文件路径一致
       env:
         COVERALLS_PARALLEL: true
         COVERALLS_FLAG_NAME: myflag
         COVERALLS_SERVICE_NAME: github
         COVERALLS_SERVICE_JOB_ID: ${{ github.run_id }}
         COVERALLS_SERVICE_PULL_REQUEST: ${{ github.event.pull_request.number }}
-      after_script:
-        - conda run -n libenv coverage xml
 
 
     - name: Build the package
