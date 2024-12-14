@@ -7,7 +7,7 @@ def _serialize_value(value):
     # 定义类型转换规则
     type_serializers = {
         list: lambda v: json.dumps(v).encode('utf-8'),
-        dict: lambda v: json.dumps({k: self._serialize_value(v)[0] for k, v in v.items()}).encode('utf-8'),
+        dict: lambda v: json.dumps({k: _serialize_value(v)[0] for k, v in v.items()}).encode('utf-8'),
         tuple: lambda v: json.dumps(list(v)).encode('utf-8'),
         set: lambda v: json.dumps(list(v)).encode('utf-8'),
         frozenset: lambda v: json.dumps(list(v)).encode('utf-8'),
@@ -35,7 +35,7 @@ def _deserialize_value(value_str, value_type):
     # 定义类型反转换规则
     type_deserializers = {
         'list': lambda v: json.loads(v),
-        'dict': lambda v: json.loads({k: self._deserialize_value(v)[0] for k, v in v.items()}),
+        'dict': lambda v: json.loads({k: _deserialize_value(v)[0] for k, v in v.items()}),
         'tuple': lambda v: tuple(json.loads(v)),
         'set': lambda v: set(json.loads(v)),
         'frozenset': lambda v: frozenset(json.loads(v)),
