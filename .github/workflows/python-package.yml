@@ -31,7 +31,7 @@ jobs:
 
     - name: Test with pytest
       run: |
-        conda run -n libenv coverage run --source=Descriptorlib ../run_tests.py
+        conda run -n libenv coverage run --source=Descriptorlib run_tests.py
       shell: /usr/bin/bash -e {0}
       env:
         INPUT_RUN_POST: true
