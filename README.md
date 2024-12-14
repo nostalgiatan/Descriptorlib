@@ -1,7 +1,8 @@
 # Descriptorlib: Python 属性描述符库
 ---
 
-[![Build Status](https://img.shields.io/travis/nostalgiatan/Descriptorlib/master.svg?style=flat-square)](https://travis-ci.org/nostalgiatan/Descriptorlib)
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-LGPL-green.svg)](LICENSE)
 [![Coverage Status](https://img.shields.io/coveralls/nostalgiatan/Descriptorlib/master.svg?style=flat-square)](https://coveralls.io/r/https://github.com/nostalgiatan/Descriptorlib)
 [![PyPI](https://img.shields.io/pypi/v/Descriptorlib.svg?style=flat-square)](https://pypi.org/project/Descriptorlib/)
 [![Documentation Status](https://readthedocs.org/projects/descriptorlib/badge/?version=latest&style=flat-square)](https://descriptorlib.readthedocs.io/en/latest/?badge=latest)
