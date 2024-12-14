@@ -1,4 +1,3 @@
-# Descriptorlib/run_coverage.py
 import pytest
 from coverage import Coverage
 
