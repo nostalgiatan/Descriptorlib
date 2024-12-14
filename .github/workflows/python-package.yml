@@ -21,6 +21,9 @@ jobs:
       run: conda env remove --name libenv || true
     - name: Install dependencies
       run: conda env update --file environment.yml --name libenv
+           conda list flake8
+    - name: Check if flake8 is installed
+      run: which flake8
     - name: Lint with flake8
       run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
     - name: Test with pytest
