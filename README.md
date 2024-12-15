@@ -21,8 +21,8 @@ pip install Descriptorlib
 
 `Descriptorlib` 提供了详细的文档，包括中文和英文版本。每个描述符都有其对应的文档，方便用户查找和使用。
 
-- [中文文档](/docs/Chinese/Descriptordocs)
-- [英文文档](/docs/English/Descriptordocs)
+- [Chinese Documentation](/docs/Chinese/Descriptordocs)
+- [English Documentation](/docs/English/Descriptordocs)
 
 ### 常见问题与解决方案
 
