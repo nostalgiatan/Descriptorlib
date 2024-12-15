@@ -14,7 +14,7 @@
 使用 pip 安装 `Descriptorlib`:
 
 ```bash
-pip install Descriptorlib
+pip install descriptorlib
 ```
 
 ## 文档
