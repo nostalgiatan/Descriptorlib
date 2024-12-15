@@ -11,6 +11,7 @@ author = 'snow'
 release = '0.1.0'
 
 # -- 常规配置 ---------------------------------------------------
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
@@ -19,6 +20,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
 ]
+
 
 # 添加任何包含模板的路径，相对于这个目录。
 templates_path = ['_templates']
@@ -53,7 +55,7 @@ html_static_path = ['_static']
 # 自定义侧边栏模板，必须是一个将文档名称映射到模板名称的字典。
 html_sidebars = {
     '**': [
-        'relations.html',  # 需要 'show_related': True 主题选项来显示
+        'relations.html',
         'searchbox.html',
     ]
 }
@@ -120,7 +122,7 @@ epub_exclude_files = ['search.html']
 # intersphinx 的配置，引用 Python 标准库。
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
-    'sphinx': ('https://www.sphinx-doc.org/zh_CN/master/', None),
+    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
 }
 
 # -- todo 扩展选项 ----------------------------------------------
@@ -143,3 +145,5 @@ ifconfig_debug = False
 
 # HTML 帮助构建器的输出文件基本名称。
 htmlhelp_basename = 'Descriptorlib'
+
+master_doc = 'index'
