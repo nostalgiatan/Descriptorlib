@@ -1,0 +1,34 @@
+ 
+version:0.1.0
+
+# Sphinx 使用的配置文件
+sphinx:
+ configuration: docs/conf.py
+
+# Python 配置
+python:
+ version: 3.10
+ install:
+   - requirements: docs/requirements.txt
+   - method: pip
+     path: .
+   - method: setuptools
+     path: .
+
+# 构建环境设置
+build:
+ image: latest
+
+# 额外的配置选项
+formats:
+ - pdf
+ - epub
+
+# 不在 Read the Docs 上构建 PDF 文档的例子
+# formats:
+#   - epub
+
+# 通知设置
+notifications:
+ email: false
+ 
