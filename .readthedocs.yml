@@ -27,11 +27,6 @@ formats:
 notifications:
   email: false  # 关闭电子邮件通知
 
-# 额外的配置选项
-# 指定使用的 Conda 环境文件（如果使用 Conda）
-conda:
-  file: environment.yml
-
 # 指定在构建过程中使用的系统包
 system_packages:
   - graphviz 
