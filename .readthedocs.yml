@@ -1,4 +1,3 @@
- 
 version:0.1.0
 
 # Sphinx 使用的配置文件
@@ -24,11 +23,6 @@ formats:
  - pdf
  - epub
 
-# 不在 Read the Docs 上构建 PDF 文档的例子
-# formats:
-#   - epub
-
 # 通知设置
 notifications:
  email: false
- 
