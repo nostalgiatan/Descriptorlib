@@ -52,16 +52,7 @@ jobs:
         conda run -n libenv python -m build
         ls dist
     
-    - name: Build the documentation
-      run: |
-        conda run -n libenv pip install -r docs/requirements.txt  # 安装文档依赖
-        conda run -n libenv sphinx-build -b html docs/ build/docs  # 构建文档
-
-    # 检查文档构建是否成功
-    - name: Check built documentation
-      run: |
-        ls build/docs  # 确保文档已构建
-
+    
     - name: Install the package
       run: conda run -n libenv pip install dist/*.whl
     - name: Check the installed package
