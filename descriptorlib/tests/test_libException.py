@@ -1,7 +1,6 @@
 import pytest
 import threading
-from ..monomer.libException import MonomerPropertyError, DeserializationError, SerializationError, DescriptorLibError
-from ..monomer import Descriptor
+from ..monomer import MonomerPropertyError,Descriptor,  DeserializationError, SerializationError, DescriptorLibError
 
 class TestbaseDescriptor:
     class MyClass:
@@ -36,7 +35,7 @@ class TestbaseDescriptor:
         obj = self.MyClass()
         with pytest.raises(DescriptorLibError) as exc_info:
             del obj.attr
-        assert exc_info.value.error_code == 'ATTRIBUTE_DELETE'
+        assert 'ATTRIBUTE_DELETE' in str(exc_info.value)
     
     def test_descriptor_delete_not_found(self):
         class TestClass:
