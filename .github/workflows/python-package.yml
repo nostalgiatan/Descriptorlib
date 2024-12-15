@@ -52,7 +52,7 @@ jobs:
         conda run -n libenv python -m build
         ls dist
     - name: Install the package
-      run: pip install dist/*
+      run: pip install dist/*.whl
     - name: Check the installed package
       run: |
         # Add commands to check the installed package if necessary
