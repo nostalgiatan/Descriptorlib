@@ -1,6 +1,6 @@
 import pytest
 import threading
-from ..monomer import MonomerPropertyError,Descriptor,  DeserializationError, SerializationError, DescriptorLibError
+from descriptorlib.monomer import MonomerPropertyError,Descriptor,  DeserializationError, SerializationError, DescriptorLibError
 
 class TestbaseDescriptor:
     class MyClass:
