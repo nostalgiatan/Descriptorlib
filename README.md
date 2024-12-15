@@ -7,7 +7,7 @@
 [![PyPI](https://img.shields.io/pypi/v/Descriptorlib.svg?style=flat-square)](https://pypi.org/project/Descriptorlib/)
 [![Documentation Status](https://readthedocs.org/projects/descriptorlib/badge/?version=latest&style=flat-square)](https://descriptorlib.readthedocs.io/en/latest/?badge=latest)
 
-`Descriptorlib` 是一个 Python 库，它提供了一系列强大的属性描述符，用于增强 Python 类的属性功能。通过使用描述符，你可以轻松实现属性的类型检查、只读、延迟初始化、版本控制、线程安全等特性。
+`Descriptorlib` 是一个 Python 库，它提供了一系列强大的描述符，用于增强 Python 类的属性功能。通过使用描述符，你可以轻松实现属性的类型检查、只读、延迟初始化、版本控制、线程安全等特性。
 
 ## 安装
 
