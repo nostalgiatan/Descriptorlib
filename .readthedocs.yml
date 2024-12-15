@@ -1,28 +1,44 @@
-version:0.1.0
+version: 2
 
-# Sphinx 使用的配置文件
+# Sphinx 配置
 sphinx:
- configuration: docs/conf.py
+  configuration: docs/conf.py
+  fail_on_warning: true  # 在警告时失败，确保文档的质量
 
 # Python 配置
 python:
- version: 3.10
- install:
-   - requirements: docs/requirements.txt
-   - method: pip
-     path: .
-   - method: setuptools
-     path: .
+  version: 3.10  # 指定 Python 版本
+  install:
+    - method: pip
+      path: .
+      extra_requirements:
+        - docs/requirements.txt
 
 # 构建环境设置
 build:
- image: latest
+  image: readthedocs/build:latest
 
-# 额外的配置选项
+# 构建格式设置
 formats:
- - pdf
- - epub
+  - pdf
+  - epub
 
 # 通知设置
 notifications:
- email: false
+  email: false  # 关闭电子邮件通知
+
+# 额外的配置选项
+# 指定使用的 Conda 环境文件（如果使用 Conda）
+conda:
+  file: environment.yml
+
+# 指定在构建过程中使用的系统包
+system_packages:
+  - graphviz 
+
+# 指定构建的目录
+build:
+  os: ubuntu-20.04  # 指定操作系统版本
+  tools:
+    python: "3.10"  # 指定 Python 工具版本
+ 
