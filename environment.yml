@@ -7,5 +7,6 @@ dependencies:
   - pip
   - pytest
   - flake8
+  - build
   - pip:
     - twine
