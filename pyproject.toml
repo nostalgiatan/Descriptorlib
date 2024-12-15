@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "descriptorlib"
+version = "0.1.0"
+description = "Descriptorlib is a Python library that provides a series of powerful descriptors for enhancing the attribute functionality of Python classes."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+    {name = "解文", email = "2965312076@qq.com"}
+]
+keywords = [
+    "descriptor", "function", "描述符", "属性描述",
+    "Python descriptors", "class attributes", "property decorators"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: LGPL License",
+    "Operating System :: OS Independent",
+]
+[project.urls]
+"Bug Reports" = "https://github.com/nostalgiatan/Descriptorlib/issues"
+"Source" = "https://github.com/nostalgiatan/Descriptorlib/"
+"Documentation" = "https://github.com/nostalgiatan/Descriptorlib/wiki"
+
+[tool.setuptools]
+packages = ["descriptorlib"]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=6.0.0",
+    "coverage>=5.0",
+]
