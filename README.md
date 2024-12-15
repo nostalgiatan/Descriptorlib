@@ -44,7 +44,7 @@ pip install descriptorlib
 
 ## 贡献指南
 
-我们欢迎和鼓励社区成员为 `Descriptorlib` 做出贡献。请参考 [CONTRIBUTING.md](CONTRIBUTING.md) 了解如何贡献代码。
+我们欢迎和鼓励社区成员为 `Descriptorlib` 做出贡献。
 
 ## 许可证
 
