@@ -49,8 +49,8 @@ jobs:
 
     - name: Build the package
       run: |
-        conda run -n libenv python setup.py sdist bdist_wheel
-        ls dist  # Optional: to check the contents of the dist directory
+        conda run -n libenv python -m build
+        ls dist
     - name: Install the package
       run: pip install dist/*
     - name: Check the installed package
@@ -61,8 +61,7 @@ jobs:
     - name: Publish to PyPI
       if: startsWith(github.ref, 'refs/tags')
       run: |
-        pip install twine
-        twine upload dist/*
+        conda run -n libenv twine upload dist/*
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
