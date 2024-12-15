@@ -87,7 +87,7 @@ man_pages = [
 ]
 
 # -- Texinfo 输出选项 ----------------------------------------------
-
+master_doc = 'index'
 # 将文档树分组到 Texinfo 文件中。元组列表
 # (源起始文件, 目标名称, 标题, 作者,
 #  目录菜单条目, 描述, 类别)
@@ -146,4 +146,3 @@ ifconfig_debug = False
 # HTML 帮助构建器的输出文件基本名称。
 htmlhelp_basename = 'Descriptorlib'
 
-master_doc = 'index'
