@@ -27,7 +27,7 @@ classifiers = [
 "Documentation" = "https://github.com/nostalgiatan/Descriptorlib/wiki"
 
 [tool.setuptools]
-packages = ["descriptorlib"]
+packages = ["descriptorlib", "descriptorlib.monomer", "descriptorlib.tests"]
 
 [project.optional-dependencies]
 test = [
